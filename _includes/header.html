@@ -1,31 +1,44 @@
-<header class="sticky top-0 z-50 flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
-  <!-- Logo & Version -->
-  <div class="flex items-center space-x-4">
-    <a href="{{ '/' | relative_url }}" class="flex items-center space-x-2">
-      <div class="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center text-white font-bold text-lg shadow-sm">
-        T
-      </div>
-      <span class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">Tailwind<span class="text-cyan-500">Docs</span></span>
-    </a>
-    <span class="hidden sm:inline-flex text-xs px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold">v3.4</span>
-  </div>
+<header class="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] bg-white/95 dark:bg-slate-900/75 border-b border-slate-200">
+    <div class="max-w-8xl mx-auto">
+        <div class="py-3 px-4 lg:px-8 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button id="mobile-menu-btn" class="lg:hidden text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <a href="{{ '/' | relative_url }}" class="flex items-center gap-2 text-slate-900 dark:text-white font-bold text-lg tracking-tight">
+                    <svg class="h-6 w-auto fill-sky-500" viewBox="0 0 24 24">
+                        <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.336 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C3.666 17.818 5.027 19.2 8.001 19.2c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C6.336 13.382 4.975 12 2.001 12z"/>
+                    </svg>
+                    <span>JekyllDocs</span>
+                    <span class="text-xs bg-sky-500/10 text-sky-500 dark:text-sky-400 font-semibold px-2 py-0.5 rounded-full">v3.4.0</span>
+                </a>
+            </div>
 
-  <!-- Search Bar Trigger Mockup -->
-  <div class="flex-1 max-w-md mx-4 hidden md:block">
-    <button type="button" class="w-full flex items-center justify-between px-3 py-1.5 text-sm text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-800/60 rounded-md border border-slate-200 dark:border-slate-700/50 hover:border-slate-300 dark:hover:border-slate-600 transition">
-      <span class="flex items-center space-x-2">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-        <span>Quick search...</span>
-      </span>
-      <kbd class="hidden lg:inline-block px-1.5 py-0.5 text-[10px] font-semibold text-slate-400 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded">⌘K</kbd>
-    </button>
-  </div>
+            <!-- Global Search Box -->
+            <div class="hidden md:flex flex-1 max-w-md mx-8">
+                <div class="relative w-full">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+                        <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                    </span>
+                    <input type="text" id="doc-search-input" placeholder="Quick search... (Press '/' to focus)" class="w-full pl-9 pr-12 py-1.5 text-sm rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-transparent focus:border-sky-500 focus:bg-white dark:focus:bg-slate-900 focus:outline-none transition-all placeholder-slate-400">
+                    <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-xs text-slate-400">
+                        <kbd class="px-1.5 py-0.5 border border-slate-300 dark:border-slate-700 rounded shadow-xs bg-slate-50 dark:bg-slate-800">⌘K</kbd>
+                    </span>
+                </div>
+            </div>
 
-  <!-- Right Actions / Dark Mode Toggle -->
-  <div class="flex items-center space-x-3">
-    <button onclick="toggleDarkMode()" class="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition">
-      <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-      <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-    </button>
-  </div>
+            <!-- Theme Toggle & GitHub -->
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" title="Toggle Light/Dark Theme" class="p-2 rounded-lg text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white focus:outline-none">
+                    <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-lg hidden"></i>
+                    <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-lg hidden"></i>
+                </button>
+                <a href="https://github.com" target="_blank" class="text-slate-400 hover:text-slate-500 dark:hover:text-slate-300">
+                    <i class="fa-brands fa-github text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </div>
 </header>
+
+<div id="mobile-sidebar-backdrop" class="fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-sm hidden lg:hidden"></div>

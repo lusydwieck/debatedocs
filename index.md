@@ -1,19 +1,15 @@
 ---
 layout: doc
-title: Overview & Setup
+title: Tailwind-Style Documentation Template
+description: A sleek, modern responsive documentation layout optimized for Jekyll static site generation.
 ---
 
-# Overview & Setup {#overview}
-
-Welcome to your documentation site. It is powered by Jekyll, styled with Tailwind CSS, and designed to match the official Tailwind documentation layout.
-
-Tailwind CSS[^1] provides utility classes that let you build rapid layouts, while Jekyll compiles your markdown into static files seamlessly[^2].
+## Overview & Setup {#overview}
+This template delivers a pixel-perfect documentation design modeled directly after modern frameworks like Tailwind CSS.
 
 ## Installation Guide {#installation}
+To get started with Jekyll and Tailwind CSS, run your bundler commands.
 
-To get started, add your markdown files to the repository and link them in your sidebar.
-
-```html
-<div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
-  <div class="text-xl font-medium text-black">Tailwind Docs</div>
-</div>
+```bash
+gem install jekyll bundler
+jekyll new my-docs-site

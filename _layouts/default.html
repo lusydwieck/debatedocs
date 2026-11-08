@@ -1,56 +1,69 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-white dark:bg-slate-900">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title | default: site.title }}</title>
-  <!-- Tailwind CSS Play CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            cyan: { 500: '#06b6d4', 600: '#0891b2' }
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        sky: { 500: '#06b6d4', 600: '#0891b2', 400: '#38bdf8' }
+                    }
+                }
+            }
         }
-      }
-    }
-    // Dark mode initializer
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    function toggleDarkMode() {
-      if (document.documentElement.classList.contains('dark')) {
-        document.documentElement.classList.remove('dark');
-        localStorage.theme = 'light';
-      } else {
-        document.documentElement.classList.add('dark');
-        localStorage.theme = 'dark';
-      }
-    }
-  </script>
-  <style>
-    /* Tailwind Docs Custom Typography Tweaks */
-    .prose h1 { @apply text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4; }
-    .prose h2 { @apply text-xl font-bold text-slate-900 dark:text-white tracking-tight mt-10 mb-4 pt-4 border-t border-slate-100 dark:border-slate-800/60; }
-    .prose p { @apply text-slate-600 dark:text-slate-400 leading-relaxed mb-6; }
-    .prose a.footnote { @apply text-cyan-500 font-semibold no-underline; }
-    .prose pre { @apply bg-slate-900 text-slate-200 rounded-xl p-4 my-6 text-sm overflow-x-auto shadow-lg border border-slate-800; }
-    .prose code { @apply text-cyan-600 dark:text-cyan-400 font-medium; }
-    .prose pre code { @apply text-slate-200 bg-transparent p-0; }
-  </style>
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+    </style>
 </head>
-<body class="h-full font-sans antialiased text-slate-800 dark:text-slate-100 bg-white dark:bg-slate-900 selection:bg-cyan-500 selection:text-white">
-  
-  {% include header.html %}
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex">
+<body class="bg-white text-slate-700 dark:bg-slate-900 dark:text-slate-300 transition-colors duration-200">
     {{ content }}
-  </div>
 
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            lightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            darkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn?.addEventListener('click', function() {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const backdrop = document.getElementById('mobile-sidebar-backdrop');
+
+        function toggleMobileMenu() {
+            sidebar?.classList.toggle('-translate-x-full');
+            backdrop?.classList.toggle('hidden');
+        }
+        mobileBtn?.addEventListener('click', toggleMobileMenu);
+        backdrop?.addEventListener('click', toggleMobileMenu);
+    </script>
 </body>
 </html>

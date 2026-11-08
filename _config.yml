@@ -1,5 +1,5 @@
-title: "Documentation"
-description: "A Jekyll documentation site styled like Tailwind CSS."
+title: "JekyllDocs"
+description: "A sleek, modern responsive documentation layout optimized for Jekyll static site generation."
 markdown: kramdown
 theme: minima
 kramdown:
