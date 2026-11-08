@@ -1,10 +1,31 @@
-<header class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
-  <div class="flex items-center space-x-3">
-    <a href="{{ '/' | relative_url }}" class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
-      Docs<span class="text-blue-500">Template</span>
-    </a>
-  </div>
+<header class="sticky top-0 z-50 flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+  <!-- Logo & Version -->
   <div class="flex items-center space-x-4">
-    <span class="text-xs px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400 font-medium">v1.0.0</span>
+    <a href="{{ '/' | relative_url }}" class="flex items-center space-x-2">
+      <div class="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center text-white font-bold text-lg shadow-sm">
+        T
+      </div>
+      <span class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">Tailwind<span class="text-cyan-500">Docs</span></span>
+    </a>
+    <span class="hidden sm:inline-flex text-xs px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold">v3.4</span>
+  </div>
+
+  <!-- Search Bar Trigger Mockup -->
+  <div class="flex-1 max-w-md mx-4 hidden md:block">
+    <button type="button" class="w-full flex items-center justify-between px-3 py-1.5 text-sm text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-800/60 rounded-md border border-slate-200 dark:border-slate-700/50 hover:border-slate-300 dark:hover:border-slate-600 transition">
+      <span class="flex items-center space-x-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <span>Quick search...</span>
+      </span>
+      <kbd class="hidden lg:inline-block px-1.5 py-0.5 text-[10px] font-semibold text-slate-400 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded">⌘K</kbd>
+    </button>
+  </div>
+
+  <!-- Right Actions / Dark Mode Toggle -->
+  <div class="flex items-center space-x-3">
+    <button onclick="toggleDarkMode()" class="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+      <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+    </button>
   </div>
 </header>

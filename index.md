@@ -3,20 +3,17 @@ layout: doc
 title: Overview & Setup
 ---
 
-# Overview & Setup
+# Overview & Setup {#overview}
 
-Welcome to your Tailwind-styled documentation template powered by Jekyll and GitHub Pages. 
+Welcome to your documentation site. It is powered by Jekyll, styled with Tailwind CSS, and designed to match the official Tailwind documentation layout.
 
-Tailwind CSS[^1] provides low-level utility classes that let you build custom designs rapidly, while Jekyll turns plain Markdown files into a static website automatically.
+Tailwind CSS[^1] provides utility classes that let you build rapid layouts, while Jekyll compiles your markdown into static files seamlessly[^2].
 
 ## Installation Guide {#installation}
 
-To get started, clone your repository and configure your files using the structure outlined above.
+To get started, add your markdown files to the repository and link them in your sidebar.
 
-## Configuration Settings {#configuration}
-
-You can adjust your site settings inside `_config.yml`.
-
----
-
-[^1]: Tailwind CSS allows rapid UI development without leaving your HTML.
+```html
+<div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+  <div class="text-xl font-medium text-black">Tailwind Docs</div>
+</div>

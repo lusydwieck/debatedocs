@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title | default: site.title }}</title>
+  <!-- Tailwind CSS Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -11,14 +12,39 @@
       theme: {
         extend: {
           colors: {
-            brand: { 50: '#eff6ff', 500: '#3b82f6', 600: '#2563eb' }
+            cyan: { 500: '#06b6d4', 600: '#0891b2' }
           }
         }
       }
     }
+    // Dark mode initializer
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    function toggleDarkMode() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+      }
+    }
   </script>
+  <style>
+    /* Tailwind Docs Custom Typography Tweaks */
+    .prose h1 { @apply text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4; }
+    .prose h2 { @apply text-xl font-bold text-slate-900 dark:text-white tracking-tight mt-10 mb-4 pt-4 border-t border-slate-100 dark:border-slate-800/60; }
+    .prose p { @apply text-slate-600 dark:text-slate-400 leading-relaxed mb-6; }
+    .prose a.footnote { @apply text-cyan-500 font-semibold no-underline; }
+    .prose pre { @apply bg-slate-900 text-slate-200 rounded-xl p-4 my-6 text-sm overflow-x-auto shadow-lg border border-slate-800; }
+    .prose code { @apply text-cyan-600 dark:text-cyan-400 font-medium; }
+    .prose pre code { @apply text-slate-200 bg-transparent p-0; }
+  </style>
 </head>
-<body class="h-full font-sans antialiased text-slate-800 dark:text-slate-100 bg-white dark:bg-slate-900">
+<body class="h-full font-sans antialiased text-slate-800 dark:text-slate-100 bg-white dark:bg-slate-900 selection:bg-cyan-500 selection:text-white">
   
   {% include header.html %}
 

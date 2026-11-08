@@ -1,5 +1,5 @@
-title: "Tailwind Docs Template"
-description: "A Jekyll documentation template styled like Tailwind CSS."
+title: "Documentation"
+description: "A Jekyll documentation site styled like Tailwind CSS."
 markdown: kramdown
 theme: minima
 kramdown:
