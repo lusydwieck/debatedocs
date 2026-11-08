@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: Tailwind-Style Documentation Template
+title: Debate Docs
 description: A sleek, modern responsive documentation layout optimized for Jekyll static site generation.
 ---
 
