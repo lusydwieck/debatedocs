@@ -1,0 +1,4 @@
+title: "My Tailwind Docs"
+description: "A Jekyll site styled with Tailwind CSS and footnotes."
+markdown: kramdown
+theme: minima
