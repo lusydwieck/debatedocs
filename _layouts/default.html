@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth overflow-y-scroll">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -17,34 +18,116 @@
             }
         }
     </script>
+    <!-- Inter & Fira Code Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: 'Inter', sans-serif; }
         code, pre { font-family: 'Fira Code', monospace; }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+        .dark ::-webkit-scrollbar-thumb { background: #334155; }
     </style>
 </head>
 <body class="bg-white text-slate-700 dark:bg-slate-900 dark:text-slate-300 transition-colors duration-200">
+    
     {{ content }}
 
+    <!-- Lunr.js Client-Side Search Engine CDN -->
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+
     <script>
+        let searchIndex = null;
+        let documents = [];
+
+        // 1. Fetch search index data and initialize Lunr
+        fetch("{{ '/search.json' | relative_url }}")
+            .then(response => response.json())
+            .then(data => {
+                documents = data;
+                searchIndex = lunr(function () {
+                    this.ref('id');
+                    this.field('title', { boost: 10 });
+                    this.field('content');
+
+                    documents.forEach(doc => {
+                        this.add(doc);
+                    }, this);
+                });
+            })
+            .catch(err => console.error("Error loading search index:", err));
+
+        // 2. Handle Search Typing & Results Rendering
+        const searchInput = document.getElementById('doc-search-input');
+        const resultsContainer = document.getElementById('search-results-container');
+
+        searchInput?.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            
+            if (!query || !searchIndex) {
+                resultsContainer?.classList.add('hidden');
+                if (resultsContainer) resultsContainer.innerHTML = '';
+                return;
+            }
+
+            const results = searchIndex.search(query + "*");
+            
+            if (results.length > 0) {
+                let html = '';
+                results.slice(0, 5).forEach(result => {
+                    const doc = documents[result.ref];
+                    html += `<li><a href="${doc.url}" class="block px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/60 font-medium text-slate-900 dark:text-white transition">${doc.title}</a></li>`;
+                });
+                if (resultsContainer) {
+                    resultsContainer.innerHTML = html;
+                    resultsContainer.classList.remove('hidden');
+                }
+            } else {
+                if (resultsContainer) {
+                    resultsContainer.innerHTML = '<li class="px-4 py-3 text-slate-500 text-xs">No matching documentation pages found</li>';
+                    resultsContainer.classList.remove('hidden');
+                }
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (searchInput && resultsContainer && !searchInput.contains(e.target) && !resultsContainer.contains(e.target)) {
+                resultsContainer.classList.add('hidden');
+            }
+        });
+
+        // Shortcut key (/) or (⌘K) to focus search input
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '/' || (e.metaKey && e.key === 'k')) {
+                if (document.activeElement !== searchInput) {
+                    e.preventDefault();
+                    searchInput?.focus();
+                }
+            }
+        });
+
+        // 3. Theme Toggling Logic
         const themeToggleBtn = document.getElementById('theme-toggle');
         const darkIcon = document.getElementById('theme-toggle-dark-icon');
         const lightIcon = document.getElementById('theme-toggle-light-icon');
 
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
-            lightIcon.classList.remove('hidden');
+            lightIcon?.classList.remove('hidden');
         } else {
             document.documentElement.classList.remove('dark');
-            darkIcon.classList.remove('hidden');
+            darkIcon?.classList.remove('hidden');
         }
 
         themeToggleBtn?.addEventListener('click', function() {
-            darkIcon.classList.toggle('hidden');
-            lightIcon.classList.toggle('hidden');
+            darkIcon?.classList.toggle('hidden');
+            lightIcon?.classList.toggle('hidden');
             if (document.documentElement.classList.contains('dark')) {
                 document.documentElement.classList.remove('dark');
                 localStorage.setItem('color-theme', 'light');
@@ -54,6 +137,7 @@
             }
         });
 
+        // 4. Mobile Navigation Drawer Toggle
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const sidebar = document.getElementById('sidebar');
         const backdrop = document.getElementById('mobile-sidebar-backdrop');
