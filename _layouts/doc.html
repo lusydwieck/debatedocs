@@ -1,0 +1,15 @@
+---
+layout: default
+---
+
+<!-- Left Sidebar Navigation -->
+<aside class="hidden md:block w-64 flex-none py-10 pr-8 border-r border-slate-200 dark:border-slate-800">
+  <div class="sticky top-24">
+    {% include sidebar.html %}
+  </div>
+</aside>
+
+<!-- Main Content Area -->
+<main class="flex-1 py-10 md:pl-10 prose dark:prose-invert max-w-none">
+  {{ content }}
+</main>

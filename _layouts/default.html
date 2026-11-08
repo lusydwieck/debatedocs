@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title | default: site.title }}</title>
-  <!-- Tailwind CSS Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -18,53 +17,14 @@
       }
     }
   </script>
-  <style>
-    /* Footnote Styling */
-    a.footnote {
-      color: #3b82f6;
-      font-weight: 600;
-      text-decoration: none;
-      padding: 0 2px;
-    }
-    a.footnote:hover {
-      text-decoration: underline;
-    }
-    .footnotes {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid #e2e8f0;
-      font-size: 0.875rem;
-      color: #64748b;
-    }
-    .dark .footnotes {
-      border-color: #1e293b;
-      color: #94a3b8;
-    }
-    .footnotes ol {
-      list-style-type: decimal;
-      padding-left: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    .footnotes a.reversefootnote {
-      color: #3b82f6;
-      text-decoration: none;
-      margin-left: 0.25rem;
-    }
-  </style>
 </head>
 <body class="h-full font-sans antialiased text-slate-800 dark:text-slate-100 bg-white dark:bg-slate-900">
   
-  <header class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
-    <div class="flex items-center space-x-3">
-      <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Docs<span class="text-blue-500">Template</span></span>
-    </div>
-  </header>
+  {% include header.html %}
 
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-12 prose dark:prose-invert">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex">
     {{ content }}
-  </main>
+  </div>
 
 </body>
 </html>
